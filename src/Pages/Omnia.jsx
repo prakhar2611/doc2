@@ -1,6 +1,6 @@
 import React, { use, useState } from 'react';
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme, Button,Select } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Button, Select } from 'antd';
 import { EditorNovel } from './Editor'
 import { useDispatch, useSelector } from 'react-redux';
 import { setReload } from '../Utils/Reducers/editoeSlice';
@@ -15,6 +15,7 @@ import { saveFile } from '../apis/DocsApi';
 import { MySmallCurdComponent } from './SmallCurdComponent';
 import { TitleComp } from '../Components/TitleComp';
 import { AIOpenSearch } from '../Components/AISearchComp';
+import OpenAI from 'openai';
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -57,20 +58,20 @@ export function OmniaWelcome() {
 
   const dispatch = useDispatch()
   const [content, setcontent] = useState(sd)
-  
-  
- const page =JSON.parse(localStorage.getItem('editor_page'))
 
- 
- const folder =  page.folder
- const title =  page.title
+
+  const page = JSON.parse(localStorage.getItem('editor_page'))
+
+
+  const folder = page.folder
+  const title = page.title
 
 
 
   // const folder = useSelector((state) => state.page.value['folder']);
   // const title =  useSelector((state) => state.page.value['title']);
 
-  const [save,setsave] = useState(false)
+  const [save, setsave] = useState(false)
 
 
   const [currinputfile, setcurrinputfile] = useState(folder)
@@ -137,9 +138,30 @@ export function OmniaWelcome() {
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb>
 
-        <div style={{
+
+
+        <Layout
+          style={{
+            padding: '24px 0',
+            background: colorBgContainer,
+          }}
+        >
+
+          <Content
+            style={{
+              padding: '0 24px',
+              minHeight: 280,
+              display: 'flex',
+              flexDirection: 'row'
+            }}
+          >
+
+            {/* 
+ <div style={{
           display: 'flex',
-          flexDirection: 'row',
+          flexDirection : 'row',
+          justifyItems : 'flex-start',
+          alignItems : 'start',
           width: '75rem',
           justifyContent:'center',
           gap: '2rem'
@@ -149,43 +171,47 @@ export function OmniaWelcome() {
           <TitleComp filename={title}  issaveenable = {true} currfoldername={folder}/>
 
         </div>
+ */}
 
-        <Layout
-          style={{
-            padding: '24px 0',
-            background: colorBgContainer,
-          }}
-        >
-        
-          <Content
-            style={{
-              padding: '0 24px',
-              minHeight: 280,
-              display: 'flex',
-              flexDirection: 'row'
-            }}
-          >
-            <FileList />
-            <AIOpenSearch/>
 
             <div style={{
               display: 'flex',
-              flexDirection: 'column'
+              flexDirection: 'row'
             }}>
+
+            
+              <FileList />
 
               <div style={{
                 display: 'flex',
-                flexDirection: 'row',
-                gap: '1rem'
-
+                flexDirection: 'column'
               }}>
 
-                <EditorNovel sd={content} />
-                <SideEditor />
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  gap: '1rem'
+
+                }}>
+
+                  <div style={{display:'flex',flexDirection:'column', gap:'2rem'}}>
+                  <TitleComp filename={title}  issaveenable = {true} currfoldername={folder}/>
+
+                    <EditorNovel sd={content} />
+
+                  </div>
+
+                  <div style={{display:'flex',flexDirection:'column', gap:'2rem'}}>
+                  <AIOpenSearch/>
+                  <SideEditor />
+                  </div>
+
+                </div>
 
               </div>
 
             </div>
+
             {/* <Editor/> */}
           </Content>
         </Layout>

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from "axios";
-import { Button, Input } from "antd";
+import { Button, Flex, Input } from "antd";
 function onapicall (currentInput) {
 
     const req = {
@@ -26,11 +26,10 @@ export function AIOpenSearch() {
 
     const[currentInput,setcurrentInput] = useState('')
     return(
-        <div style={{
-
-        }}>
-             <Input style={{ 'width': '30rem' }} onChange={(e) => setcurrentInput(e.target.value)} />
+         <Flex gap={'1rem'}>
+        
+             <Input style={{ 'width': '15rem' }} onChange={(e) => setcurrentInput(e.target.value)} />
     <Button style={{ 'backgroundColor': 'blue' }} onClick={() => onapicall(currentInput)}> Search </Button>
-        </div>
+        </Flex>
     )
 }
