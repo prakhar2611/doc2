@@ -1,24 +1,26 @@
-import logo from './logo.svg';
+import { Layoutant } from './AntD';
 import './App.css';
+import { EditorNovel } from './Pages/Editor';
+import { SideEditor } from './Pages/SideEditor';
+
 
 function App() {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+//     <div className='Page'>
+//       <div className='SideBar'>
+//         Hey
+//       </div>
+//       <div className='Editor'>
+//         <h2>Welcome to About redBus</h2>
+//       <EditorNovel />
+
+//         </div>
+// {/* <SideEditor/> */}
+      
+//     </div>
+<Layoutant/>
   );
 }
 

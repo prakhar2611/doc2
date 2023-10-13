@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+
+.Page {
+ display: flex;
+ flex-direction: row;
+ background-color: #282c34;
+align-items: stretch;
+gap: 2rem;
+
+}
+
+.Editor{
+  display: flex;
+  flex-direction: column;
+  background-color: #61dafb;
+  width: 100rem;
+}
+
+.SideBar{
+  display: flex;
+  background-color: bisque;
+  width: 17rem;
+}
