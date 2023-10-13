@@ -12,6 +12,9 @@ import { SideEditor } from './SideEditor'
 import { FileList } from './FileList';
 import Input from 'antd/es/input/Input';
 import { saveFile } from '../apis/DocsApi';
+import { MySmallCurdComponent } from './SmallCurdComponent';
+import { TitleComp } from '../Components/TitleComp';
+import { AIOpenSearch } from '../Components/AISearchComp';
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -54,11 +57,20 @@ export function OmniaWelcome() {
 
   const dispatch = useDispatch()
   const [content, setcontent] = useState(sd)
-  const folder = useSelector((state) => state.page.value['folder']);
-  const [currfoldername,setinputFolder] = useState(folder)
+  
+  
+ const page =JSON.parse(localStorage.getItem('editor_page'))
+
+ 
+ const folder =  page.folder
+ const title =  page.title
+
+
+
+  // const folder = useSelector((state) => state.page.value['folder']);
+  // const title =  useSelector((state) => state.page.value['title']);
 
   const [save,setsave] = useState(false)
-  const folderList = useSelector((state)=>state.directory.value.folderList);
 
 
   const [currinputfile, setcurrinputfile] = useState(folder)
@@ -70,12 +82,6 @@ export function OmniaWelcome() {
 
 
 
-  function SaveComponent() {
-    return (<div className='save'>
-    <Input style={{ 'width': '30rem' }} disabled={false} onChange={(e) => setcurrinputfile(e.target.value)} />
-    <Button style={{ 'backgroundColor': 'blue' }} onClick={() => onSave()}> Save </Button>
-  </div>)
-  }
 
   function loglocalstrg() {
     const items = JSON.parse(localStorage.getItem('items'))
@@ -101,13 +107,6 @@ export function OmniaWelcome() {
   }
 
 
-  function onSave() {
-    // const items = JSON.parse(localStorage.getItem('items'))
-    const y = localStorage.getItem('novel__content');
-    saveFile(JSON.stringify(y), currinputfile, "NewFolder")
-    window.location.reload();
-
-  }
 
 
 
@@ -142,16 +141,12 @@ export function OmniaWelcome() {
           display: 'flex',
           flexDirection: 'row',
           width: '75rem',
-          alignItems: 'stretch',
+          justifyContent:'center',
           gap: '2rem'
         }}>
 
 
-          <Heading size={"2"}>FILE NAME</Heading>
-          <Select value={currfoldername} options={folderList} onSelect={(x) => {setinputFolder(x)}} ></Select>
-
-          {(save) && <SaveComponent/>}
-
+          <TitleComp filename={title}  issaveenable = {true} currfoldername={folder}/>
 
         </div>
 
@@ -161,22 +156,7 @@ export function OmniaWelcome() {
             background: colorBgContainer,
           }}
         >
-          {/* <Sider
-            style={{
-              background: colorBgContainer,
-            }}
-            width={200}
-          >
-            <Menu
-              mode="inline"
-              defaultSelectedKeys={['1']}
-              defaultOpenKeys={['sub1']}
-              style={{
-                height: '100%',
-              }}
-              items={items2}
-            />
-          </Sider> */}
+        
           <Content
             style={{
               padding: '0 24px',
@@ -186,30 +166,12 @@ export function OmniaWelcome() {
             }}
           >
             <FileList />
+            <AIOpenSearch/>
 
             <div style={{
               display: 'flex',
               flexDirection: 'column'
             }}>
-
-              {/* buttons and inputs             */}
-              {/* <div style={{
-              display : 'flex',
-              flexDirection : 'row',
-              width : '75rem',
-              alignItems : 'stretch',
-              gap : '2rem'
-            }}>
-              
-
-              <Heading size={"2"}>FILE NAME</Heading>        
-              <Input style={{ 'width': '30rem' }} disabled={false} onChange={(e) => setinputFolder(e.target.value)} />
-              <Button style={{ 'backgroundColor': 'blue' }} onClick={() => onSave()}> Save </Button>
-              
-              </div> */}
-
-
-              {/* Editors  */}
 
               <div style={{
                 display: 'flex',

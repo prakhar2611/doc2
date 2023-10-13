@@ -20,6 +20,7 @@ export function EditorNovel({ sd }) {
     //use the above when the above state passed is actually the whole state struct to use
     // .to JSON() you need to go to editor state struct whoch has that fuction defined
     const editorStateJSON = editor.getJSON()
+    setcontent(editorStateJSON)
     // const editorStateJSON = editor.get
     // console.log(JSON.stringify(editorStateJSON))
   }

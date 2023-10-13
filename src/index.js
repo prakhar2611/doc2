@@ -12,6 +12,18 @@ import { CallbackRoute } from './apis/CallBack';
 import { Editor } from 'novel';
 import SignIn from './Pages/Sing-In/SignIn';
 import { OmniaWelcome } from './Pages/Omnia';
+import { sd } from './Pages/defaultdata';
+
+//uncomment when you start application 
+// const page = {
+//   content : sd,
+//   title : "Create New",
+//   folder : "Folder Name"
+// }
+
+// localStorage.setItem('editor_page', JSON.stringify(page));
+
+
 
 const router = createBrowserRouter([
   {

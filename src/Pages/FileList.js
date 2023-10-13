@@ -34,15 +34,26 @@ export function FileList () {
   const onSelect = (selectedKeys, info) => {
     const value =''
     console.log('selected', selectedKeys,     info.node);
-    dispatch(setCurrFolder(info.node.folder))
+
+    // dispatch(setCurrFolder(info.node.folder))
+   const h = JSON.parse(localStorage.getItem('editor_page'))
+   h.folder = info.node.folder
+   localStorage.setItem('editor_page', JSON.stringify(h));
+
 
     if(info.node.isLeaf) {
       getdocmeta(info.node.title,info.node.folder).then(res => {
         console.log(JSON.parse(res.MetaData))
         localStorage.setItem('novel__content', JSON.parse(res.MetaData));
+
+        //jugad to use the local storage
+        const h = JSON.parse(localStorage.getItem('editor_page'))
+        h.title = info.node.title
+        localStorage.setItem('editor_page', JSON.stringify(h));
+
         window.location.reload();
 
-        // dispatch(setCurrPage(res))
+      dispatch(setCurrPage(res))
       }).catch(error => console.error(error))
     }else{
       onExpand(selectedKeys,info)

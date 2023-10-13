@@ -20,6 +20,7 @@ export function SideEditor() {
         width : '20rem',
           }}>
             <Editor className='SideEditor1'
+            disableLocalStorage={false}
      storageKey='SideEditor'
      completionApi='http://localhost:9005/api/generate'
     //   onDebouncedUpdate={(editor) => onChange(editor)}
