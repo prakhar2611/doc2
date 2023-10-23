@@ -13,6 +13,7 @@ import { Editor } from 'novel';
 import SignIn from './Pages/Sing-In/SignIn';
 import { OmniaWelcome } from './Pages/Omnia';
 import { sd } from './Pages/defaultdata';
+import { Omnia } from './Pages/Omnia copy';
 
 //uncomment when you start application 
 // const page = {
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
   {
     path : "/auth/callback",
     element : <CallbackRoute />
+
+  },
+  {
+    path : "/docsnew",
+    element : <Omnia />
 
   }
 ]);

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Button, Flex, Input, Spin } from "antd";
 import {SendOutlined,LoadingOutlined}  from '@ant-design/icons'
 import { RocketIcon } from "@radix-ui/react-icons";
-import { Heading, IconButton } from "@radix-ui/themes";
+import { Heading, IconButton, TextField } from "@radix-ui/themes";
 
 
 
@@ -77,14 +77,25 @@ export function AIOpenSearch() {
 
     const [currentInput, setcurrentInput] = useState('')
     return (
-        <Flex gap={'1rem'}>
+        <div className="flex flex-col place-items-center gap-3 ">
 
             <Heading >ASK OMNIA</Heading>
-            <Input style={{ 'width': '15rem' }} onChange={(e) => setcurrentInput(e.target.value)} />
+            <div className="flex flex-row gap-2">
+            <TextField.Input
+                    className='min-w-[100ch]'
+                    color="indigo"
+                    variant="soft"
+                    placeholder="Ask About redBus"
+                    onChange={(e) => setcurrentInput(e.target.value)}
+                  />
+          
             <SendOutlined onClick={() => onapicall(currentInput)}> search</SendOutlined >
+
+            </div>
+            
             <Button onClick={() => onGoapicall()}> summarize</Button>
 
             {loading && <LoadingOutlined  />}
-        </Flex>
+        </div>
     )
 }

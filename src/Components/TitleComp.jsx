@@ -32,19 +32,11 @@ export function TitleComp({ filename, issaveenable, currfoldername }) {
     const [selectedFolder, setselectedFolder] = useState()
 
     return (
-        <div style={{
-            display : 'flex',
-            flexDirection : 'row',
-            gap : '25rem'
-        }}>
-            <Flex 
-            style={{
-                gap : '2rem'
-            }}>
+        <div className="flex flex-row gap-4 place-content shadow-inner" >
+            
                 <Heading size="6">{filename}</Heading>
                 <Select value={currfoldername} options={folderList} onSelect={(x) => { setselectedFolder(x) }} ></Select>
                 {(issaveenable) && <SaveComponent />}
-            </Flex>
 
         </div>
     )
