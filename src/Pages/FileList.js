@@ -62,12 +62,17 @@ export function FileList () {
 
   function onExpand (keys, info){
     dispatch(setCurrFolder(info.node.title))
+     // dispatch(setCurrFolder(info.node.folder))
+   const h = JSON.parse(localStorage.getItem('editor_page'))
+   h.folder = info.node.folder
+   localStorage.setItem('editor_page', JSON.stringify(h));
   };
 
 
   
     useEffect(() => {
       getdocs().then(res => {
+        
        dispatch(updatedirectory(res)) 
       }).catch(error => console.error(error))
     }, [1]);    
@@ -84,7 +89,7 @@ export function FileList () {
   //   treeData={data}
   // />   */}
 
-<DirectoryTree style={{'display' : 'flex','width' : '10rem'}}
+<DirectoryTree style={{'display' : 'flex','width' : '15rem'}}
       multiple
       switcherIcon={<DownOutlined />}
       defaultExpandAll={true}

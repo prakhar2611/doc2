@@ -3,7 +3,7 @@ import { Editor } from "novel";
 import { useDispatch, useSelector } from 'react-redux';
 import { setcontent } from '../Utils/Reducers/contentSlice';
 import { useEffect, useState } from 'react';
-
+import { Flex } from '@radix-ui/themes'; 
 
 export function EditorNovel({ sd }) {
 
@@ -25,18 +25,18 @@ export function EditorNovel({ sd }) {
     // console.log(JSON.stringify(editorStateJSON))
   }
 
+  
+
   return (
-    <div style={{
-      backgroundColor : '#cbd7f7',
-      width : '50rem'
-    }}>
+    <Flex >
       <Editor
         // defaultValue={sd}
         value={content}
         disableLocalStorage={false}
         onDebouncedUpdate={(editor) => onChange(editor)} />
 
-    </div>
+    </Flex>
+      
 
   );
 }

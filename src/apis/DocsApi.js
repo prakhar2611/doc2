@@ -5,33 +5,47 @@ import { updatedirectory } from "../Utils/Reducers/directorySlice";
 const serverurl = process.env.REACT_APP_TEST_SERVER_URL
 const token = sessionStorage.getItem('access_token');
 
-export function getdocs(){
+export function getdocs(isorg=false){
     //const dispatch = useDispatch()
 
-    console.log("Request payload for fetching the data : ", serverurl+`docs/api/v1/listDocs` )
-    return  axios.get(`http://localhost:9005/docs/api/v1/listDocs`,{
-            headers: {           
-                'Content-Type': 'application/json',
-                'token' :  token
-            },        
-        })
-        .then(response => response.data.Data)
-        .catch(error => {return console.error(error)});
+    if(isorg){
+      console.log("Request payload for fetching the data : ", serverurl+`docs/api/v1/listDocs` )
+      return  axios.get(`http://localhost:9005/docs/api/v1/listOrgDocs`,{
+              headers: {           
+                  'Content-Type': 'application/json',
+              },        
+          })
+          .then(response => response.data.Data)
+          .catch(error => {return console.error(error)});
+    }else{
+      console.log("Request payload for fetching the data : ", serverurl+`docs/api/v1/listDocs` )
+      return  axios.get(`http://localhost:9005/docs/api/v1/listDocs`,{
+              headers: {           
+                  'Content-Type': 'application/json',
+                  'token' :  token
+              },        
+          })
+          .then(response => response.data.Data)
+          .catch(error => {return console.error(error)});
+    }
+
+    
   }
 
-  export function getdocmeta(title,folder){
+  export function getdocmeta(title,folder,isOrg=false){
     //const dispatch = useDispatch()
 
     const request ={
         "title" : title,
-        "folder" : folder
+        "folder" : folder,
+        "isOrg" : isOrg,
     }
     console.log("Request payload for fetching the data : ", request)
 
     return  axios.post(`http://localhost:9005/docs/api/v1/getDocsMeta`,JSON.stringify(request),{
             headers: {           
                 'Content-Type': 'application/json',
-                'token' :  token
+                'token' :  token,
             },        
         })
         .then(response =>  response.data.Data)

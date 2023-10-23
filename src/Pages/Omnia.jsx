@@ -16,6 +16,7 @@ import { MySmallCurdComponent } from './SmallCurdComponent';
 import { TitleComp } from '../Components/TitleComp';
 import { AIOpenSearch } from '../Components/AISearchComp';
 import OpenAI from 'openai';
+import { StaticOrgData } from '../Components/StaticOrgData';
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -55,6 +56,8 @@ function GetEditor({ sd }) {
 
 
 export function OmniaWelcome() {
+
+
 
   const dispatch = useDispatch()
   const [content, setcontent] = useState(sd)
@@ -111,33 +114,29 @@ export function OmniaWelcome() {
 
 
 
-  return (
+  return (<Theme>
     <Layout>
-      <Header
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <div className="demo-logo" />
-
-        {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} /> */}
-      </Header>
+      
       <Content
         style={{
           padding: '0 50px',
         }}
       >
-        <Breadcrumb
+        <div
           style={{
+            display : 'flex',
             margin: '16px 0',
+            gap : '2rem'
           }}
         >
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
+          {/* <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+          <Breadcrumb.Item>App</Breadcrumb.Item> */}
+          <Button href='http://10.120.19.216:3000'>Analytics</Button>
+          <Button href='http://localhost:8080'>Playground</Button>
 
+
+        </div>
 
 
         <Layout
@@ -156,32 +155,23 @@ export function OmniaWelcome() {
             }}
           >
 
-            {/* 
- <div style={{
-          display: 'flex',
-          flexDirection : 'row',
-          justifyItems : 'flex-start',
-          alignItems : 'start',
-          width: '75rem',
-          justifyContent:'center',
-          gap: '2rem'
-        }}>
-
-
-          <TitleComp filename={title}  issaveenable = {true} currfoldername={folder}/>
-
-        </div>
- */}
 
 
             <div style={{
               display: 'flex',
+              gap : '1rem',
               flexDirection: 'row'
             }}>
 
-            
+              <div style={{
+                display:'flex',
+                flexDirection : 'column'
+              }}>
+              <StaticOrgData/>
               <FileList />
 
+              </div>
+           
               <div style={{
                 display: 'flex',
                 flexDirection: 'column'
@@ -190,15 +180,13 @@ export function OmniaWelcome() {
                 <div style={{
                   display: 'flex',
                   flexDirection: 'row',
-                  gap: '1rem'
+                  gap: '1rem',
 
                 }}>
 
                   <div style={{display:'flex',flexDirection:'column', gap:'2rem'}}>
                   <TitleComp filename={title}  issaveenable = {true} currfoldername={folder}/>
-
-                    <EditorNovel sd={content} />
-
+                  <EditorNovel sd={content} />
                   </div>
 
                   <div style={{display:'flex',flexDirection:'column', gap:'2rem'}}>
@@ -223,5 +211,7 @@ export function OmniaWelcome() {
       >
       </Footer>
     </Layout>
+    
+    </Theme>
   );
 };

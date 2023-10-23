@@ -1,35 +1,90 @@
 import { useState } from "react"
 import axios from "axios";
-import { Button, Flex, Input } from "antd";
-function onapicall (currentInput) {
+import { Button, Flex, Input, Spin } from "antd";
+import {SendOutlined,LoadingOutlined}  from '@ant-design/icons'
+import { RocketIcon } from "@radix-ui/react-icons";
+import { Heading, IconButton } from "@radix-ui/themes";
 
-    const req = {
-        'query' : currentInput
-    }
-    console.log("httng ai api : ",JSON.stringify(req))
-  axios.put(`http://10.120.17.10:5000/api/hrdocs/query`,JSON.stringify(req),{
-            headers: {           
-                'Content-Type': 'application/json',
-            },        
-        })
-        .then((response) => {
-            console.log(response.data)
-            const d = {"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":response.data.result}]}]}
-            localStorage.setItem('SideEditor', JSON.stringify(d));
-            window.location.reload();
 
-        })
-        .catch(error => {return console.error(error)});
-}
 
 export function AIOpenSearch() {
+    const [loading, setloading] = useState(false)
 
-    const[currentInput,setcurrentInput] = useState('')
-    return(
-         <Flex gap={'1rem'}>
-        
-             <Input style={{ 'width': '15rem' }} onChange={(e) => setcurrentInput(e.target.value)} />
-    <Button style={{ 'backgroundColor': 'blue' }} onClick={() => onapicall(currentInput)}> Search </Button>
+    function onapicall(currentInput) {
+        setloading(true)
+        const req = {
+            'query': currentInput,
+        }
+        console.log("httng ai api : ", JSON.stringify(req))
+        axios.put(`http://10.120.17.34:5000/api/hrdocs/query`, JSON.stringify(req), {
+            headers: {
+                'Content-Type': 'application/json',
+
+            },
+        })
+            .then((response) => {
+                console.log(response.data)
+                const preData = JSON.parse(localStorage.getItem('SideEditor'))
+                if (preData != null) {
+                    const question = { "type": "paragraph", "content": [{ "type": "text", "text": currentInput }] }
+                    const answer = { "type": "paragraph", "content": [{ "type": "text", "text": response.data.result }] }
+                    preData.content.push(question)
+                    preData.content.push(answer)
+                    localStorage.setItem('SideEditor', JSON.stringify(preData));
+
+                } else {
+                    const d = { "type": "doc", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": currentInput }] }, { "type": "paragraph", "content": [{ "type": "text", "text": response.data.result }] }] }
+                    localStorage.setItem('SideEditor', JSON.stringify(d));
+                }
+                window.location.reload();
+
+
+
+            })
+            .catch(error => { return console.error(error) });
+    }
+
+    function onGoapicall() {
+        const preData = JSON.parse(localStorage.getItem('novel__content'))
+
+
+
+        setloading(true)
+        const req = {
+            'data': JSON.stringify(preData)
+        }
+        console.log("httng ai api : ", JSON.stringify(req))
+        axios.post(`http://localhost:9005/docs/api/generate`, JSON.stringify(req), {
+            headers: {
+                'Content-Type': 'application/json',
+
+            },
+        })
+            .then((response) => {
+                console.log("response : ",response.data)
+                const preData = JSON.parse(localStorage.getItem('SideEditor'))
+
+                const d = { "type": "doc", "content": [ { "type": "paragraph", "content": [{ "type": "text", "text": response.data.reply }] }] }
+                localStorage.setItem('SideEditor', JSON.stringify(d));
+
+                window.location.reload();
+
+
+
+            })
+            .catch(error => { return console.error(error) });
+    }
+
+    const [currentInput, setcurrentInput] = useState('')
+    return (
+        <Flex gap={'1rem'}>
+
+            <Heading >ASK OMNIA</Heading>
+            <Input style={{ 'width': '15rem' }} onChange={(e) => setcurrentInput(e.target.value)} />
+            <SendOutlined onClick={() => onapicall(currentInput)}> search</SendOutlined >
+            <Button onClick={() => onGoapicall()}> summarize</Button>
+
+            {loading && <LoadingOutlined  />}
         </Flex>
     )
 }

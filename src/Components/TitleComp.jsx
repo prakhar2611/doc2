@@ -20,7 +20,7 @@ function SaveComponent() {
     return (
         <Flex gap={'1rem'}>
             <Input style={{ 'width': '15rem' }} disabled={false} onChange={(e) => setcurrinputfile(e.target.value)} />
-            <Button style={{ 'backgroundColor': 'blue' }} onClick={() => onSave()}> Save </Button>
+            <Button style={{ 'backgroundColor': 'grey' }} onClick={() => onSave()}> Save </Button>
         </Flex>
     )
 }
@@ -45,13 +45,6 @@ export function TitleComp({ filename, issaveenable, currfoldername }) {
                 <Select value={currfoldername} options={folderList} onSelect={(x) => { setselectedFolder(x) }} ></Select>
                 {(issaveenable) && <SaveComponent />}
             </Flex>
-
-
-
-           
-
-              
-
 
         </div>
     )

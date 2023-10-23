@@ -16,8 +16,7 @@ export function SideEditor() {
   return (
       <div
       style={{
-          backgroundColor : '#cbd7f7',
-        width : '20rem',
+        width : '25rem',
           }}>
             <Editor className='SideEditor1'
             disableLocalStorage={false}
