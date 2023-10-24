@@ -17,6 +17,7 @@ import { TitleComp } from '../Components/TitleComp';
 import { AIOpenSearch } from '../Components/AISearchComp';
 import OpenAI from 'openai';
 import { StaticOrgData } from '../Components/StaticOrgData';
+import ControlsComponent from '../Components/test';
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -114,105 +115,109 @@ export function OmniaWelcome() {
 
 
 
-  return (<Theme>
-    <Layout>
+  // return (<Theme>
+  //   <Layout>
       
-      <Content
-        style={{
-          padding: '0 50px',
-        }}
-      >
-        <div
-          style={{
-            display : 'flex',
-            margin: '16px 0',
-            gap : '2rem'
-          }}
-        >
-          {/* <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item> */}
-          <Button href='http://10.120.19.216:3000'>Analytics</Button>
-          <Button href='http://localhost:8080'>Playground</Button>
+  //     <Content
+  //       style={{
+  //         padding: '0 50px',
+  //       }}
+  //     >
+  //       <div
+  //         style={{
+  //           display : 'flex',
+  //           margin: '16px 0',
+  //           gap : '2rem'
+  //         }}
+  //       >
+  //         {/* <Breadcrumb.Item>Home</Breadcrumb.Item>
+  //         <Breadcrumb.Item>List</Breadcrumb.Item>
+  //         <Breadcrumb.Item>App</Breadcrumb.Item> */}
+  //         <Button href='http://10.120.19.216:3000'>Analytics</Button>
+  //         <Button href='http://localhost:8080'>Playground</Button>
 
 
-        </div>
+  //       </div>
 
 
-        <Layout
-          style={{
-            padding: '24px 0',
-            background: colorBgContainer,
-          }}
-        >
+  //       <Layout
+  //         style={{
+  //           padding: '24px 0',
+  //           background: colorBgContainer,
+  //         }}
+  //       >
 
-          <Content
-            style={{
-              padding: '0 24px',
-              minHeight: 280,
-              display: 'flex',
-              flexDirection: 'row'
-            }}
-          >
+  //         <Content
+  //           style={{
+  //             padding: '0 24px',
+  //             minHeight: 280,
+  //             display: 'flex',
+  //             flexDirection: 'row'
+  //           }}
+  //         >
 
 
 
-            <div style={{
-              display: 'flex',
-              gap : '1rem',
-              flexDirection: 'row'
-            }}>
+  //           <div style={{
+  //             display: 'flex',
+  //             gap : '1rem',
+  //             flexDirection: 'row'
+  //           }}>
 
-              <div style={{
-                display:'flex',
-                flexDirection : 'column'
-              }}>
-              <StaticOrgData/>
-              <FileList />
+  //             <div style={{
+  //               display:'flex',
+  //               flexDirection : 'column'
+  //             }}>
+  //             <StaticOrgData/>
+  //             <FileList />
 
-              </div>
+  //             </div>
            
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column'
-              }}>
+  //             <div style={{
+  //               display: 'flex',
+  //               flexDirection: 'column'
+  //             }}>
 
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  gap: '1rem',
+  //               <div style={{
+  //                 display: 'flex',
+  //                 flexDirection: 'row',
+  //                 gap: '1rem',
 
-                }}>
+  //               }}>
 
-                  <div style={{display:'flex',flexDirection:'column', gap:'2rem'}}>
-                  <TitleComp filename={title}  issaveenable = {true} currfoldername={folder}/>
-                  <EditorNovel sd={content} />
-                  </div>
+  //                 <div style={{display:'flex',flexDirection:'column', gap:'2rem'}}>
+  //                 <TitleComp filename={title}  issaveenable = {true} currfoldername={folder}/>
+  //                 <EditorNovel sd={content} />
+  //                 </div>
 
-                  <div style={{display:'flex',flexDirection:'column', gap:'2rem'}}>
-                  <AIOpenSearch/>
-                  <SideEditor />
-                  </div>
+  //                 <div style={{display:'flex',flexDirection:'column', gap:'2rem'}}>
+  //                 <AIOpenSearch/>
+  //                 <SideEditor />
+  //                 </div>
 
-                </div>
+  //               </div>
 
-              </div>
+  //             </div>
 
-            </div>
+  //           </div>
 
-            {/* <Editor/> */}
-          </Content>
-        </Layout>
-      </Content>
+  //           {/* <Editor/> */}
+  //         </Content>
+  //       </Layout>
+  //     </Content>
       
-      <Footer
-        style={{
-          textAlign: 'center',
-        }}
-      >
-      </Footer>
-    </Layout>
+  //     <Footer
+  //       style={{
+  //         textAlign: 'center',
+  //       }}
+  //     >
+  //     </Footer>
+  //   </Layout>
     
-    </Theme>
-  );
+  //   </Theme>
+  //);
+
+  return(
+    <ControlsComponent/>
+  )
 };

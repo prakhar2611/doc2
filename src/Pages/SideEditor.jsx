@@ -2,7 +2,7 @@ import './App.css';
 import { Editor } from "novel";
 
 
-export function SideEditor() {
+export function SideEditor({content}) {
 
 
   function onChange(editor) {
@@ -21,6 +21,7 @@ export function SideEditor() {
             <Editor className='SideEditor1'
             disableLocalStorage={false}
      storageKey='SideEditor'
+     value={content}
      completionApi='http://localhost:9005/api/generate'
     //   onDebouncedUpdate={(editor) => onChange(editor)}
      />
