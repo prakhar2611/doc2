@@ -23,15 +23,18 @@ export function EditorNovel({ sd }) {
 
 
   return (
-    <Flex >
+    <div >
       <Editor
-        onChange={onchange}
+      
+        className='flex md:max-w-[120ch] md:min-w-[100ch] shadow-lg'
+        // onChange={onchange}
         // defaultValue={sd}
         defaultValue={sd}
         disableLocalStorage={false}
-        onDebouncedUpdate={(editor) => onChange(editor)} />
+        // onDebouncedUpdate={(editor) => onChange(editor)} 
+        />
 
-    </Flex>
+    </div>
       
 
   );

@@ -25,11 +25,7 @@ export const HorizontalBars=(counts)=>{
     console.log("tot",counts.count);
     console.log("total",Sum);
     return(
-        <div style={{
-            display:'flex',
-            justifyContent:"center",
-            alignItems:"center",
-            width:"50%"}}>
+        <div className='flex max-w-[80ch] max-h-[40ch]'>
         <Bar
         data={{
             labels: ["Baseline of total no of commits","Total no of commits"],

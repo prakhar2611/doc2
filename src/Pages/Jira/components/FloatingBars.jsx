@@ -6,12 +6,7 @@ const BarChart = ({dates,counts}) => {
     console.log("dates1 ",dates)
     console.log("count1 ",counts)
   return (
-    <div style={{
-        display:'flex',
-        justifyContent:"center",
-        alignItems:"center",
-        width:"50%"
-    }}>
+    <div className='flex max-w-[40ch] max-h-[40ch]'>
       <Bar
         data={{
             

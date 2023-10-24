@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 
 import { LaptopOutlined, NotificationOutlined, UserOutlined,  MenuFoldOutlined,
   MenuUnfoldOutlined,
+  ProjectFilled,
   UploadOutlined,
   VideoCameraOutlined,PlusCircleFilled } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme, Button, Select } from 'antd';
@@ -13,7 +14,6 @@ import { setReload } from '../Utils/Reducers/editoeSlice';
 import { Theme, Flex, Container, Box, Card, Heading, Text, TextField } from "@radix-ui/themes";
 
 import { sd } from './defaultdata';
-import { Editor } from "novel"
 import { SideEditor } from './SideEditor'
 import { FileList } from './FileList';
 import Input from 'antd/es/input/Input';
@@ -53,7 +53,7 @@ const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, i
 
 function GetEditor({ sd }) {
   return (
-    <Editor
+    <EditorNovel
       defaultValue={sd}
       disableLocalStorage={true}
     />
@@ -212,6 +212,7 @@ function onSelect (selectedKeys, isorg=true )  {
   if(node.isLeaf) {
     getdocmeta(node.title,node.folder).then(res => {
       console.log(JSON.parse(res.MetaData))
+      localStorage.removeItem('novel__content')
       localStorage.setItem('novel__content', JSON.parse(res.MetaData));
 
     // const existingComponent = containerRef.current.querySelector('.dynamic-component');
@@ -220,39 +221,20 @@ function onSelect (selectedKeys, isorg=true )  {
     //   console.log("Removing exsting Node")
     //   existingComponent.remove();
     // } 
+    setChangeLayout(false)
+    restoreScrollPosition(position);
+    setcurrentFolder(node.folder)
+    setcurrentfile(node.title)
+    
     const container = document.getElementById('Editor');
     const root = createRoot(container);
     root.render(
-    
       <Provider store={store}>
         <TitleCompEditor title={node.title} folder={node.folder} isorg={isorg} />
              <EditorNovel sd={JSON.parse(res.MetaData)}   />
               
        </Provider>);
-       setcurrentFolder(node.folder)
-       setcurrentfile(node.title)
-    restoreScrollPosition(position);
 
-    //   const newDiv = document.createElement('div');
-    //   newDiv.className = 'dynamic-component';
-    //   containerRef.current.appendChild(newDiv);
-    //   const element = (
-    //     <Provider store={store}>
-    //       <EditorNovel sd={JSON.parse(res.MetaData)}   />
-    //     </Provider>
-    //   );
-    //   ReactDOM.createRoot(element, newDiv);
-    
-
-      //jugad to use the local storage
-      const h = JSON.parse(localStorage.getItem('editor_page'))
-      h.title = node.title
-      localStorage.setItem('editor_page', JSON.stringify(h));
-
-
-      // window.location.reload();
-
-    // dispatch(setCurrPage(res))
     }).catch(error => console.error(error))
   }else{
     // onExpand(selectedKeys,info)
@@ -265,6 +247,7 @@ function createNewTemplate() {
   localStorage.setItem('novel__content', JSON.stringify(sd));
 
   const container = document.getElementById('Editor');
+  console.log("container" , container)
   const root = createRoot(container);
   root.render(
     <Provider store={store}>
@@ -276,19 +259,18 @@ function createNewTemplate() {
 }
 
 function jira(){
-  setChangeLayout(!changeLayout);
+  setChangeLayout(true);
 }
-console.log("change::",changeLayout);
 
   return (
   <Theme>
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className='m-5 p-5 gap-2'/>
-        <div className='flex place-content-center'>
+        <div className='flex flex-col gap-2 place-items-center'>
 
         <Button className='place-items-center' onClick={createNewTemplate} type='primary' shape="circle" icon={<PlusCircleFilled  />} />
-        <Button className='place-items-center' onClick={jira} type='primary' shape="circle" icon={<PlusCircleFilled  />} />
+        <Button className='place-items-center' onClick={jira} type='primary' shape="circle" icon={<ProjectFilled /> } />
         </div>
         <Menu
           theme="dark"
@@ -334,27 +316,22 @@ console.log("change::",changeLayout);
             background: colorBgContainer,
           }}
         > */}
-        <Content className=' flex flex-col m-6 p-5 bg-white place-content-center place-items-center'>
+        <Content className=' flex flex-col m-3 p-2 bg-white place min-h-screen  '>
 
-        <div className='flex  min-w-[80ch] m-5 p-5 shadow-md rounded-sm'>
+        <div className='flex m-5 p-5 shadow-md rounded-sm place-content-center'>
         <AIOpenSearch ediotrRef={SideEditorRef}/>
         </div>
 
-         <div className= {!changeLayout? 'flex': "style"} >
-              <div className= {!changeLayout? 'flex flex-col':""} >
-                <div className= {!changeLayout? 'flex gap-5 place-items-stretch ':""}>
+         <div className='flex place-content-around gap-2' >
                   {!changeLayout?
-                  <div className='flex flex-col place-items-stretch'>
-                  <div className='flex flex-col' ref={containerRef} id="Editor" ></div>
-                  <EditorNovel sd={content} />
-                  </div>: <JiraBoard/>}
-                 { !changeLayout ?
-                  <div className='flex place-items-center flex-col min-w-[48ch] max-w-[48ch]   bg-slate-100'>
-                  <div ref={SideEditorRef} id="SideEditor" ></div>
-                  </div> :null}
-                </div>
-              </div>
-            </div>
+                  <div className='flex flex-col gap-2' ref={containerRef} id="Editor" ></div>
+                  : <JiraBoard/>}
+              
+                    <div className='flex place-items-center flex-col  bg-slate-100'>
+                    <div ref={SideEditorRef} id="SideEditor" ></div>
+                    </div> 
+                
+          </div>
         </Content>
       </Layout>
     </Layout>

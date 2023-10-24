@@ -15,10 +15,8 @@ export function SideEditor({content}) {
 
   return (
       <div
-      style={{
-        width : '25rem',
-          }}>
-            <Editor className='SideEditor1'
+      >
+            <Editor className='felx md:max-w-[50ch] md:min-w-[50ch]'
             disableLocalStorage={false}
      storageKey='SideEditor'
      value={content}
