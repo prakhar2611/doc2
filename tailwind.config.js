@@ -5,6 +5,9 @@ module.exports = {
   theme: {
     extend: {},
   },
+  backgroundImage: {
+    'my-bg': "url('/a.jpg')"  // Path to your image in the public folder
+  },
   plugins: [],
 }
 

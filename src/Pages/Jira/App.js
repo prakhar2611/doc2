@@ -199,13 +199,13 @@ const genderArr=gender.map((val,i) =>
 //        <HorizontalBars count={counts}/>
 //     </div>
 
-      <div className="flex flex-col gap-5 min-w-[60ch] place-items-center">
+      <div className="flex flex-col gap-5 place-items-center w-1/2">
           <div className="flex flex-col gap-2 place-items-center">
             <Heading>JIRA ID</Heading>
             <Select className="min-w-[15ch]" value={selectedGender} onChange={(d) => handleDropddown(d)}> {genderArr}</Select> 
           </div>
 
-          <BarChart className="min-w-max" dates={dates} counts={counts}/>
+          <BarChart dates={dates} counts={counts}/>
           <HorizontalBars count={counts}/>
 
       </div>

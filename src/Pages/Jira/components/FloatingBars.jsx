@@ -6,8 +6,8 @@ const BarChart = ({dates,counts}) => {
     console.log("dates1 ",dates)
     console.log("count1 ",counts)
   return (
-    <div className='flex max-w-[40ch] max-h-[40ch]'>
-      <Bar
+    <div className=' w-[80ch] '>
+      <Bar 
         data={{
             
           labels: dates,

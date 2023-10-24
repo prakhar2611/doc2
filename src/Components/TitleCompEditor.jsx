@@ -8,11 +8,11 @@ import { saveFile } from "../apis/DocsApi";
 export default function TitleCompEditor({ title, folder, isorg = true }) {
     return (
         <div className=" md:grid md:grid-cols-6 place-items-start shadow-inner ">
-            <div className="flex flex-col m-5 col-span-5 place-items-center p-5">
-                <Heading as="h3">{title}</Heading>
-                <Heading color="blue" size={2} as="h3">{folder}</Heading>
+            <div className="flex flex-col m-6 col-span-5 place-items-center p-5">
+                <Heading size={"7"}>{title.toUpperCase()}</Heading>
+                <Heading color="blue" size={2} as="h3">{folder.toUpperCase()}</Heading>
             </div>
-            <div className="flex flex-col gap-2 place-self-center">
+            <div className="flex flex-col p-5 gap-2 place-self-center">
                 <Button col-start-5 onClick={() => onGoapicall()}> summarize</Button>
                 {!(isorg) && <Button onClick={() => onSave(title, folder)} > save</Button>}
 
