@@ -1,0 +1,48 @@
+.App {
+  margin: 50px 20px;
+  padding: 2px;
+}
+
+.btn{
+  border: none;
+  border-radius: 2px;
+  width: 119px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 400;
+  background: #00acf1;
+  color: white;
+  border: 1px solid #cfcfcf !important;
+  border-radius: 4px !important;
+}
+
+.apiResponseContainer{
+  margin-top: 40px;
+  display: flex;
+}
+
+.jiraContainer{
+  width: 40%;
+}
+
+.gitContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  width: 50%;
+}
+
+.commitContent{
+  
+}
+
+.select{
+  padding: 8px 8px;
+  border: 1px solid #bababa;
+  border-radius: 4px;
+  margin-left: 2%;
+  width: 12%;
+  margin-top: 1%;
+}
+
+

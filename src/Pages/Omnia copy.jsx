@@ -25,10 +25,8 @@ import OpenAI from 'openai';
 import { StaticOrgData } from '../Components/StaticOrgData';
 import TitleCompEditor, { NewTitleEditor } from '../Components/TitleCompEditor';
 import store from '../Utils/store';
-
-
-
-
+import { JiraBoard } from './Jira/App';
+import  "./App.css";
 const { Header, Content, Footer, Sider } = Layout;
 const items1 = ['1', '2', '3'].map((key) => ({
   key,
@@ -75,6 +73,7 @@ export function Omnia() {
   const [currentFolder, setcurrentFolder] = useState("")
   const [currentFile, setcurrentfile] = useState("")
   const [FolderList,setFolderList] = useState([])
+  const [changeLayout,setChangeLayout] = useState(false);
 
   const dispatch = useDispatch()
   const [content, setcontent] = useState(sd)
@@ -276,6 +275,10 @@ function createNewTemplate() {
 
 }
 
+function jira(){
+  setChangeLayout(!changeLayout);
+}
+console.log("change::",changeLayout);
 
   return (
   <Theme>
@@ -285,7 +288,7 @@ function createNewTemplate() {
         <div className='flex place-content-center'>
 
         <Button className='place-items-center' onClick={createNewTemplate} type='primary' shape="circle" icon={<PlusCircleFilled  />} />
-
+        <Button className='place-items-center' onClick={jira} type='primary' shape="circle" icon={<PlusCircleFilled  />} />
         </div>
         <Menu
           theme="dark"
@@ -337,17 +340,18 @@ function createNewTemplate() {
         <AIOpenSearch ediotrRef={SideEditorRef}/>
         </div>
 
-         <div className='flex'>
-              <div className='flex flex-col '>
-                <div className='flex gap-5 place-items-stretch '>
+         <div className= {!changeLayout? 'flex': "style"} >
+              <div className= {!changeLayout? 'flex flex-col':""} >
+                <div className= {!changeLayout? 'flex gap-5 place-items-stretch ':""}>
+                  {!changeLayout?
                   <div className='flex flex-col place-items-stretch'>
-                    <div className='flex flex-col' ref={containerRef} id="Editor" ></div>
-                  {/* <EditorNovel sd={content} /> */}
-                  </div>
-
+                  <div className='flex flex-col' ref={containerRef} id="Editor" ></div>
+                  <EditorNovel sd={content} />
+                  </div>: <JiraBoard/>}
+                 { !changeLayout ?
                   <div className='flex place-items-center flex-col min-w-[48ch] max-w-[48ch]   bg-slate-100'>
                   <div ref={SideEditorRef} id="SideEditor" ></div>
-                  </div>
+                  </div> :null}
                 </div>
               </div>
             </div>

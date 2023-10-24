@@ -14,6 +14,7 @@ import SignIn from './Pages/Sing-In/SignIn';
 import { OmniaWelcome } from './Pages/Omnia';
 import { sd } from './Pages/defaultdata';
 import { Omnia } from './Pages/Omnia copy';
+import { JiraBoard } from './Pages/Jira/App';
 
 //uncomment when you start application 
 // const page = {
@@ -43,6 +44,11 @@ const router = createBrowserRouter([
   {
     path : "/docsnew",
     element : <Omnia />
+
+  },
+  {
+    path : "/jira",
+    element : <JiraBoard />
 
   }
 ]);
