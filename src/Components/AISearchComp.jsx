@@ -126,7 +126,7 @@ export function AIOpenSearch({ ediotrRef }) {
 
     function AISearchBgBlur() {
         return (
-            <div className="relative md:min-w-[150ch] md:min-h-[30ch]">
+            <div className="relative md:min-w-[90%] md:min-h-[30ch]">
                 {/* Pseudo-element for blurred background */}
                 <div
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
