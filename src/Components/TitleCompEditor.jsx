@@ -1,9 +1,10 @@
 import { Heading } from "@radix-ui/themes";
 import { Button, Input, Select } from "antd";
-import { onGoapicall } from "./AISearchComp";
+import { onGoapicall, onapisummarizecall } from "./AISearchComp";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { saveFile } from "../apis/DocsApi";
+import parseNodeToPlainText from "../Utils/parser";
 
 export default function TitleCompEditor({ title, folder, isorg = true }) {
     return (
@@ -50,14 +51,15 @@ export function NewTitleEditor({ FolderList }) {
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
     return (
-        <div className=" grid grid-cols-6 place-items-center shadow-inner ">
-            <div className="flex flex-col col-span-5 place-items-center p-5 gap-2">
+        <div className=" grid grid-cols-6 place-items-centershadow-inner ">
+            <div className="flex flex-col col-span-5 place-content-start p-5 gap-2">
                 <Input style={{ 'width': '15rem' }}
                     placeholder="Enter File Name"
                     onChange={(e) => setcurrinputfile(e.target.value)} />
-                <Select className="min-w-[20ch]"
+                <Select className="max-w-[20ch]"
                     showSearch
                     placeholder="Enter Folder Name"
+                    value={folderName}
                     optionFilterProp="children"
                     filterOption={filterOption}
                     options={FolderList}
@@ -67,7 +69,19 @@ export function NewTitleEditor({ FolderList }) {
                 />
 
             </div>
+
+            <div className="flex flex-col p-5 gap-2 place-self-center">
             <Button onClick={() => { onSave(currinputfile, folderName) }} > save</Button>
+            <Button onClick={() => onGoapicall()}> summarize</Button>
+            {/* <Button onClick={() => {
+                const preData = JSON.parse(localStorage.getItem('novel__content'))
+
+                const data = parseNodeToPlainText(preData)
+                onapisummarizecall(data,true)}}> summarize</Button> */}
+
+
+            </div>
+
         </div>
 
     )

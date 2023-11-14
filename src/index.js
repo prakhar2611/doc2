@@ -34,7 +34,7 @@ const router = createBrowserRouter([
   },
   {
     path : "/docs",
-    element : <OmniaWelcome/>
+    element :<Omnia /> 
   },
   {
     path : "/auth/callback",
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
   },
   {
     path : "/docsnew",
-    element : <Omnia />
+    element : <OmniaWelcome/>
 
   },
   {

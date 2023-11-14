@@ -223,7 +223,7 @@ export function Omnia() {
         //   console.log("Removing exsting Node")
         //   existingComponent.remove();
         // } 
-        setChangeLayout(false)
+        // setChangeLayout(false)
         restoreScrollPosition(position);
         setcurrentFolder(node.folder)
         setcurrentfile(node.title)
@@ -261,7 +261,13 @@ export function Omnia() {
   }
 
   function jira() {
-    setChangeLayout(true);
+ 
+    const container = document.getElementById('Editor');
+    const root = createRoot(container);
+    root.render(
+      <Provider store={store}>
+         <JiraBoard />
+      </Provider>);
   }
 
   return (
@@ -368,9 +374,14 @@ export function Omnia() {
             </div>
 
             <div className='flex place-content-around gap-2' >
-              {!changeLayout ?
+            <div className='flex flex-col gap-2' ref={containerRef} id="Editor" ></div>
+
+              {/* {!changeLayout ?
                 <div className='flex flex-col gap-2' ref={containerRef} id="Editor" ></div>
-                : <JiraBoard />}
+                : <div className='flex flex-col gap-2' ref={containerRef} id="Editor" >
+                   <JiraBoard />
+                </div>
+               } */}
 
               <div className='flex place-items-center flex-col  bg-slate-100'>
                 <div ref={SideEditorRef} id="SideEditor" ></div>

@@ -7,7 +7,6 @@ import BarChart from "./components/FloatingBars";
 import  { HorizontalBars } from "./components/HorizontalBars";
 import { Heading } from "@radix-ui/themes";
 import { Select } from "antd";
-import { MultiSelect } from "react-multi-select-component";
 import Select1 from 'react-select';
 export function JiraBoard() {
   const [inputValue, setInputValue] = useState({ jiraId: "", mergeId: ""  });
@@ -41,7 +40,6 @@ export function JiraBoard() {
       }
     })
     .then((res)=>{
-      debugger;
       setNameList(res.data);
     })
     .catch((err)=>{
@@ -96,7 +94,6 @@ let options =  name ? name.map(item => {
   return { label, value };
 }):" ";
 console.log("name:::::",options);
-debugger;
 console.log("jira",keys);
 console.log("dateus",dates);
 console.log("count",counts);
@@ -167,11 +164,11 @@ const genderArr= keys && keys.map((val,i) =>
 
           <BarChart dates={dates} counts={counts}/>
           <HorizontalBars count={counts}/>
-          {jiraApiResponse ? <div className="jiraContainer"> 
-        <div><span>Dev Assignee :</span>{jiraApiResponse.dev_assignee }</div>
-        <div><span>Dev Effort :</span>{jiraApiResponse.dev_effort }</div>
-        <div><span>Dev StartDate :</span>{jiraApiResponse.dev_start_date ?jiraApiResponse.dev_start_date:"2023-09-29"}</div>
-        <div><span>Build DropDate :</span>{jiraApiResponse.build_drop_date }</div>
+          {jiraApiResponse ? <div className="flex flex-col gap-1"> 
+        <div><Heading>Dev Assignee :</Heading>{jiraApiResponse.dev_assignee }</div>
+        <div><Heading>Dev Effort :</Heading>{jiraApiResponse.dev_effort }</div>
+        <div><Heading>Dev StartDate :</Heading>{jiraApiResponse.dev_start_date ?jiraApiResponse.dev_start_date:"2023-09-29"}</div>
+        <div><Heading>Build DropDate :</Heading>{jiraApiResponse.build_drop_date }</div>
        </div>
        :null }
       </div>
