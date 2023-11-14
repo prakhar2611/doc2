@@ -56,7 +56,7 @@ export function JiraBoard() {
     )
     .then((res)=>{
       setKey(res.data);
-      console.log("keys:",res.data);
+      // console.log("keys:",res.data);
     })
     .catch((err)=>{
       console.error('API call error:', err);
@@ -74,8 +74,8 @@ export function JiraBoard() {
             // setChartData(mockData);
             setJiraApiResponse(response.data);
             mrId = response.data.repo_url
-            console.log("mrid::",mrId);
-            console.log("res0::",response.data);
+            // console.log("mrid::",mrId);
+            // console.log("res0::",response.data);
             response.data ? console.log(response.data):console.log("no data");
             // console.log(response.data.gitlab_data);
           })
@@ -85,6 +85,7 @@ export function JiraBoard() {
   };
 let dates= jiraApiResponse ?jiraApiResponse.commits.map(user=>user.date) :null;
 let counts= jiraApiResponse ?jiraApiResponse.commits.map(user=>user.count) :null;
+let stats = jiraApiResponse ?jiraApiResponse.commits.map(user=>user.stats) :null;
 let name = nameList ? nameList.map(user=>user.Name):null;
 let keys = key ? key.map(item=>item.Key) : null; 
 let options =  name ? name.map(item => {
@@ -93,11 +94,11 @@ let options =  name ? name.map(item => {
   const value = item; 
   return { label, value };
 }):" ";
-console.log("name:::::",options);
-console.log("jira",keys);
-console.log("dateus",dates);
-console.log("count",counts);
-console.log("selectedGender",selectedGender);
+// console.log("name:::::",options);
+
+// console.log("dateus",dates);
+// console.log("count",counts);
+// console.log("selectedGender",selectedGender);
 const gender = ["Select", "SGMY-4077","SGMY-3485"];
 // const genderArr=gender.map((val,i) =>
 // <option key={i} value={val}>{val}</option>
@@ -162,13 +163,13 @@ const genderArr= keys && keys.map((val,i) =>
             <Select className="min-w-[15ch]" value={selectedGender} onChange={(d) => handleDropddown(d)}> {genderArr}</Select> 
           </div>
 
-          <BarChart dates={dates} counts={counts}/>
+          <BarChart dates={dates} counts={counts} stats={stats}/>
           <HorizontalBars count={counts}/>
-          {jiraApiResponse ? <div className="flex flex-col gap-1"> 
-        <div><Heading>Dev Assignee :</Heading>{jiraApiResponse.dev_assignee }</div>
-        <div><Heading>Dev Effort :</Heading>{jiraApiResponse.dev_effort }</div>
-        <div><Heading>Dev StartDate :</Heading>{jiraApiResponse.dev_start_date ?jiraApiResponse.dev_start_date:"2023-09-29"}</div>
-        <div><Heading>Build DropDate :</Heading>{jiraApiResponse.build_drop_date }</div>
+          {jiraApiResponse ? <div className="jiraContainer"> 
+        <div><span><Heading>Dev Assignee :</Heading> :</span>{jiraApiResponse.dev_assignee }</div>
+        <div><span><Heading>Dev Effort :</Heading> :</span>{jiraApiResponse.dev_effort }</div>
+        <div><span><Heading>Dev StartDate :</Heading></span>{jiraApiResponse.dev_start_date ?jiraApiResponse.dev_start_date:"2023-09-29"}</div>
+        <div><span><Heading>Build Dropdate :</Heading></span>{jiraApiResponse.build_drop_date }</div>
        </div>
        :null }
       </div>
